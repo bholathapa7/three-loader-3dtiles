@@ -1500,7 +1500,6 @@ async function fetchFile(url, options) {
     if (options !== null && options !== void 0 && options.fetch && typeof (options === null || options === void 0 ? void 0 : options.fetch) !== 'function') {
       fetchOptions = options.fetch;
     }
-    fetchOptions.credentials = 'include';
 
     return await fetch(url, {...fetchOptions});
   }
@@ -2917,11 +2916,11 @@ async function load(url, loaders, options, context) {
   let data = url;
 
   if (typeof url === 'string') {
-    data = await fetch(url);
+    data = await fetch(url, {credentials: 'include'});
   }
 
   if (isBlob(url)) {
-    data = await fetch(url);
+    data = await fetch(url, {credentials: 'include'});
   }
 
   return await parse$3(data, loaders, options);
